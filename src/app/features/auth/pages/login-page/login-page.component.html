@@ -10,8 +10,11 @@
                 <button mat-button routerLink="/register">Sign up</button>
             </div>
             <div class="form-container">
-                <h1>Welcome to mybudget Login</h1>
-                <h5>Sign in with your email</h5>
+                <h1>Welcome to MyBudget Login</h1>
+                <button class="mat-raised-button" (click)="loginWithGoogle()">
+                    Sign In with Google
+                </button>
+                <h5>Or sign in with your email</h5>
                 <mybudget-login-form (formData)="login($event)"></mybudget-login-form>
             </div>
         </div>
