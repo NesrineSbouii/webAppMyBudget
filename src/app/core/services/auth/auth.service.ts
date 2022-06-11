@@ -8,8 +8,8 @@ import {
 } from '@angular/fire/auth';
 
 import { Injectable } from '@angular/core';
-import { LoginData } from '../interfaces/login-data.interface';
-import { SnackBarService } from './snackbar.service';
+import { SnackBarService } from '../snackbar/snackbar.service';
+import { LoginData } from '../../interfaces/login-data.interface';
 
 @Injectable({
   providedIn: 'root',

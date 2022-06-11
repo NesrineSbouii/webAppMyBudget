@@ -1,3 +1,5 @@
+@import "../../../../../styles/variables";
+
 .register-container{
     h1 {
         color: #838383;
@@ -20,7 +22,7 @@
     }
     
     h1 {
-        color: #5eccd6;
+        color: $brand-primary;
         font-weight: bolder;
         margin-bottom: 20px;
     }
@@ -55,7 +57,7 @@
     
     .text-container {
         align-items: center;
-        background-color: #5eccd6;
+        background-color: $brand-primary;
         border-radius: 10px 0 0 10px;
         color: #fff;
         display: flex;

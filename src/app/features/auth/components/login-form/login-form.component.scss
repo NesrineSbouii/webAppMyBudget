@@ -1,6 +1,8 @@
+@import "../../../../../styles/variables";
+
 .login-form{
     button {
-        background-color: #5eccd6;
+        background-color: $brand-primary;
         border-radius: 20px;
         color: #fff;
         padding: 0 50px;
