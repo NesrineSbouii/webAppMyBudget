@@ -1,6 +1,6 @@
 <table mat-table [dataSource]="rowData" class="mat-elevation-z8">
 
-    <ng-container *ngFor="let column of columnsDefs; let index = index; let isFirst = first; let isOdd = odd;" [matColumnDef]="column">
+    <ng-container *ngFor="let column of columnsDefs; let index = index; let isFirst = first; let isOdd = odd;" [matColumnDef]="column.content">
         <th mat-header-cell *matHeaderCellDef> {{column.header}} </th>
         <td mat-cell *matCellDef="let element"> {{element[column.content]}} </td>
     </ng-container>
