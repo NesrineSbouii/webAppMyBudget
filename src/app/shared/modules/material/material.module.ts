@@ -7,6 +7,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { MatToolbarModule } from "@angular/material/toolbar";
+import {MatTableModule} from '@angular/material/table';
 
 export const MODULES = [
     MatSnackBarModule,
@@ -17,6 +18,7 @@ export const MODULES = [
     MatIconModule,
     MatDividerModule,
     MatToolbarModule,
+    MatTableModule
 ]
 @NgModule({
     imports: MODULES,

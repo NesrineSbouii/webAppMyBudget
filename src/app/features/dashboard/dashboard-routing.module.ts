@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './container/dashboard.component';
 
 const routes: Routes = [
-  { 
+  {
     path: '',
     component: DashboardComponent,
-    children:[
+    children: [
       {
         path: 'categories',
         loadChildren: () => import('./modules/categories/categories.module').then((m) => m.CategoriesModule)
@@ -24,6 +24,11 @@ const routes: Routes = [
         loadChildren: () => import('./modules/statistics/statistics.module').then((m) => m.StatisticsModule)
       }
     ]
+  },
+  {
+    path: '',
+    redirectTo: '/statistics',
+    pathMatch: 'full'
   }
 ];
 
