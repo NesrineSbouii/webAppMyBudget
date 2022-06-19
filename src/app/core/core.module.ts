@@ -6,9 +6,6 @@ export const COMPONENTS = [
 ];
 
 @NgModule({
-    imports: [
-      SharedModule
-    ],
     declarations: COMPONENTS,
     exports: COMPONENTS
 })
