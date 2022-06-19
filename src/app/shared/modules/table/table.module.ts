@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from './components/table/table.component';
-import { SharedModule } from '../../shared.module';
+import { MaterialModule } from '../material/material.module';
 
 
 
@@ -11,7 +11,10 @@ import { SharedModule } from '../../shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    MaterialModule
+  ],
+  exports: [
+    TableComponent
   ]
 })
 export class TableModule { }
