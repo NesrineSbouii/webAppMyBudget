@@ -4,8 +4,7 @@ import { TableModule } from "./modules/table/table.module";
 
 @NgModule({
     imports: SharedModule.MODULE_LIST,
-    exports: SharedModule.MODULE_LIST,
-    declarations:[]
+    exports: [ SharedModule.MODULE_LIST],
 })
 
 
