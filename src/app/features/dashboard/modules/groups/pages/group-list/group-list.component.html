@@ -1,3 +1,4 @@
 <ng-container>
-    <mybudget-table></mybudget-table>
+    <mybudget-table [rowData]="items | async" [columnsDefs]="columnsDefs" [displayedColumns]="displayedColumns">
+    </mybudget-table>
 </ng-container>
