@@ -8,6 +8,10 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
+        path: 'groups',
+        loadChildren: () => import('./modules/groups/groups.module').then((m) => m.GroupsModule)
+      },
+      {
         path: 'categories',
         loadChildren: () => import('./modules/categories/categories.module').then((m) => m.CategoriesModule)
       },

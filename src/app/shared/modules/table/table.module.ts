@@ -13,8 +13,6 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     MaterialModule
   ],
-  exports: [
-    TableComponent
-  ]
+  exports: [TableComponent]
 })
 export class TableModule { }
