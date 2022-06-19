@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "my-budgetapi": {
+      "hosting": {
+        "My-Budget": [
+          "my-budgetapi"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "my-budgetapi"
+  }
+}

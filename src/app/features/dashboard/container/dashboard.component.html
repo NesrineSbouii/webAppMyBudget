@@ -1,0 +1,50 @@
+<mat-toolbar class="mat-elevation-z8">
+  <!--*ngIf="sidenav.mode === 'over'"-->
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  Welcome to MyBudgetApp
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+    <img routerLink="profile" class="profile-img avatar mat-elevation-z8" src="https://www.screenfeed.fr/wp-content/uploads/2013/10/default-avatar.png" />
+    <h4 class="name">Administrator</h4>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" routerLink="home">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="groups">
+      <mat-icon>group</mat-icon>
+      <span>Groups</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="statistics">
+      <mat-icon>insights</mat-icon>
+      <span>Statistics</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="projects">
+      <mat-icon>dataset</mat-icon>
+      <span>Projects</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="categories">
+      <mat-icon>person</mat-icon>
+      <span>Categories</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
