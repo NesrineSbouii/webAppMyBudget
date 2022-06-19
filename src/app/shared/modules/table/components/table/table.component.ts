@@ -15,7 +15,7 @@ export class TableComponent implements OnInit {
   @Input() rowData: any;
   @Input() columnsDefs: Column[];
   @Input() tableOptions: any;
-  @Input() displayedColumns: Column[];
+  @Input() displayedColumns: string[];
   constructor() { }
 
   ngOnInit(): void {
