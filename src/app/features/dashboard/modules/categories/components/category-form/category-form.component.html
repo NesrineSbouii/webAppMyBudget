@@ -1,0 +1,28 @@
+<section class="category-form">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field class="form-control">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" type="text" required />
+            <mat-error *ngIf="name?.hasError('required')">
+                Name is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-control">
+            <mat-label>Color</mat-label>
+            <input matInput formControlName="color" type="text" />
+        </mat-form-field>
+        <mat-form-field class="form-control">
+            <mat-label>Icon</mat-label>
+            <input matInput formControlName="icon" type="text" />
+        </mat-form-field>
+        <mat-form-field class="form-control">
+            <mat-label>Budget</mat-label>
+            <input matInput formControlName="budget" type="number" />
+        </mat-form-field>
+        <div class="form-footer">
+            <button [disabled]="form.invalid" mat-raised-button type="submit">
+                Submit
+            </button>
+        </div>
+    </form>
+</section>

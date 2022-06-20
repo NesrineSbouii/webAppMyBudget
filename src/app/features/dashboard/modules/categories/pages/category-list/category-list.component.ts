@@ -22,13 +22,12 @@ export class CategoryListComponent implements OnInit {
     { header: 'Icon', content: 'icon' },
     { header: 'Budget', content: 'budget' },
   ];
-  displayedColumns = ['name', 'budget']
-
+  displayedColumns = ['id', 'name', 'budget', 'actions'];
 
   constructor(private afs: AngularFirestore) {}
 
   ngOnInit(): void {
     this.itemsCollection = this.afs.collection<any>('categories');
-    this.items = this.itemsCollection.valueChanges();
+    this.items = this.itemsCollection.valueChanges({ idField: 'id' });
   }
 }

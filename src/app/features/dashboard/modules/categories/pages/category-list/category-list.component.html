@@ -1,7 +1,12 @@
 <ng-container>
-  <mybudget-table
+    <ul>
+        <li *ngFor="let item of items | async">
+           {{ item | json }}
+        </li>
+      </ul>  <mybudget-table
     [rowData]="items | async"
     [columnsDefs]="columnsDefs"
     [displayedColumns]="displayedColumns"
+    [tableOptions]="{ actions: ['edit'] }"
   ></mybudget-table>
 </ng-container>
