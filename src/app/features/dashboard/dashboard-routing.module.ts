@@ -13,31 +13,44 @@ const routes: Routes = [
       },
       {
         path: 'categories',
-        loadChildren: () => import('./modules/categories/categories.module').then((m) => m.CategoriesModule)
+        loadChildren: () =>
+          import('./modules/categories/categories.module').then(
+            (m) => m.CategoriesModule
+          ),
       },
       {
         path: 'projects',
-        loadChildren: () => import('./modules/projects/project.module').then((m) => m.ProjectModule)
+        loadChildren: () =>
+          import('./modules/projects/project.module').then(
+            (m) => m.ProjectModule
+          ),
       },
       {
         path: 'profile',
-        loadChildren: () => import('./modules/profile/profile.module').then((m) => m.ProfileModule)
+        loadChildren: () =>
+          import('./modules/profile/profile.module').then(
+            (m) => m.ProfileModule
+          ),
       },
       {
         path: 'statistics',
-        loadChildren: () => import('./modules/statistics/statistics.module').then((m) => m.StatisticsModule)
-      }
-    ]
+        loadChildren: () =>
+          import('./modules/statistics/statistics.module').then(
+            (m) => m.StatisticsModule
+          ),
+      },
+    ],
   },
   {
     path: '',
     redirectTo: '/statistics',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
+  { path: '**', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {}

@@ -18,11 +18,10 @@ export class ProjectListComponent implements OnInit {
     { header: 'Project Name', content: 'name' },
     { header: 'Project Budget', content: 'budget' },
     { header: 'Project Members', content: 'members' },
-    { header: '', content: 'actions' },
-  ];
-  displayedColumns = ['name', 'budget', 'members', 'actions'];
-  actions = [{ name: 'edit', icon: 'edit' }, { name: 'delete', icon: 'delete' }, { name: 'info', icon: 'info' }];
 
+  ];
+  displayedColumns = ['name', 'budget', 'members'];
+  tableOptions = { actions: [{ name: 'edit', icon: 'edit' }, { name: 'delete', icon: 'delete' }, { name: 'info', icon: 'info' }] };
 
   constructor(private afs: AngularFirestore) { }
 
@@ -33,6 +32,10 @@ export class ProjectListComponent implements OnInit {
 
   handleActionClick(data: any): void {
     console.log({ data });
+  }
+
+  handleCreate(): void {
+    console.log('Create project');
   }
 
 }

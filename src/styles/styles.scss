@@ -87,6 +87,66 @@ body {
     margin-left: 0px;
 }
 
+.m-4 {
+    margin: 1rem; /* 8px */
+}
+
+.mx-4 {
+    margin-left: 1rem; /* 8px */
+    margin-right: 1rem; /* 8px */
+}
+
+.my-4 {
+    margin-top: 1rem; /* 8px */
+    margin-bottom: 1rem; /* 8px */
+}
+
+.mt-4 {
+    margin-top: 1rem;
+} /* 8px */
+
+.mr-4 {
+    margin-right: 1rem; /* 8px */
+}
+
+.mb-4 {
+    margin-bottom: 1rem; /* 8px */
+}
+
+.ml-4 {
+    margin-left: 1rem; /* 8px */
+}
+
+.m-8 {
+    margin: 2rem; /* 8px */
+}
+
+.mx-8 {
+    margin-left: 2rem; /* 8px */
+    margin-right: 2rem; /* 8px */
+}
+
+.my-8 {
+    margin-top: 2rem; /* 8px */
+    margin-bottom: 2rem; /* 8px */
+}
+
+.mt-8 {
+    margin-top: 2rem;
+} /* 8px */
+
+.mr-8 {
+    margin-right: 2rem; /* 8px */
+}
+
+.mb-8 {
+    margin-bottom: 2rem; /* 8px */
+}
+
+.ml-8 {
+    margin-left: 2rem; /* 8px */
+}
+
 .ml-6 {
     margin-left: 1.5rem;
 }
@@ -120,6 +180,16 @@ body {
 
 .pb-0 {
     padding-bottom: 0;
+}
+
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .p-14 {
@@ -190,6 +260,10 @@ body {
     width: 100%;
 }
 
+.min-h-screen {
+    min-height: 100vh;
+}
+
 .cursor-pointer {
     cursor: pointer;
 }
@@ -211,4 +285,8 @@ body {
 .avatar-md {
     width: 150px;
     height: 150px;
+}
+
+.font-primary {
+    color: $brand-primary-dark;
 }
