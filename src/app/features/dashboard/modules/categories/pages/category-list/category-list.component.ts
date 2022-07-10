@@ -12,7 +12,7 @@ import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/d
 
 
 @Component({
-  selector: 'app-category-list',
+  selector: 'mybudget-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss'],
 })
@@ -52,7 +52,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   handleCreate(): void {
-    console.log('Create category');
+    this.router.navigate(['create'], { relativeTo: this.route });
   }
 
   openDeleteDialog(): void {

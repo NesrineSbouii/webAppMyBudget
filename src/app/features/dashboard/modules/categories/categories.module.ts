@@ -10,13 +10,14 @@ import { TitleComponent } from 'src/app/shared/components/title/title.component'
 import {MatCardModule} from '@angular/material/card';
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import { CategoryCreateComponent } from './pages/category-create/category-create.component';
 
 @NgModule({
   declarations: [
     CategoryListComponent,
     CategoryFormComponent,
-    CategoryEditComponent
+    CategoryEditComponent,
+    CategoryCreateComponent,
   ],
   entryComponents: [TitleComponent, DeleteDialogComponent],
   imports: [

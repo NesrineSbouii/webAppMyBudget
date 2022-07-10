@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CategoryFormComponent implements OnInit, OnChanges {
   form: FormGroup;
+  @Input() title: string = '';
   @Output() formData: EventEmitter<{
     name: string;
     color: string;
