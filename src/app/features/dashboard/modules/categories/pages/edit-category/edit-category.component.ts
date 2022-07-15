@@ -7,11 +7,11 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-category-edit',
-  templateUrl: './category-edit.component.html',
-  styleUrls: ['./category-edit.component.scss'],
+  selector: 'app-edit-category',
+  templateUrl: './edit-category.component.html',
+  styleUrls: ['./edit-category.component.scss'],
 })
-export class CategoryEditComponent implements OnInit {
+export class EditCategoryComponent implements OnInit {
   id: string;
   private itemDoc: AngularFirestoreDocument<any>;
   item: Observable<any>;

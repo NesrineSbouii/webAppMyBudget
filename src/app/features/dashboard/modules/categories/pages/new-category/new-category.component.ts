@@ -3,15 +3,15 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-category-create',
-  templateUrl: './category-create.component.html',
-  styleUrls: ['./category-create.component.scss'],
+  selector: 'app-new-category',
+  templateUrl: './new-category.component.html',
+  styleUrls: ['./new-category.component.scss'],
 })
-export class CategoryCreateComponent implements OnInit {
+export class NewCategoryComponent implements OnInit {
   id: string;
   private itemDoc: AngularFirestoreDocument<any>;
   item: Observable<any>;
@@ -19,6 +19,5 @@ export class CategoryCreateComponent implements OnInit {
   constructor(private afs: AngularFirestore, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log('Hello Create Category !!')
   }
 }

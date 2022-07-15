@@ -4,7 +4,7 @@
       {{ item | json }}
     </li>
   </ul> -->
-  <mybudget-title title="Hello" textButton="Create Category" (onCreate)="handleCreate()"></mybudget-title>
+  <mybudget-title title="Categories" textButton="Create Category" (onCreate)="handleCreate()"></mybudget-title>
   <mybudget-table [rowData]="items | async" [columnsDefs]="columnsDefs" [displayedColumns]="displayedColumns"
     [tableOptions]="tableOptions" (onActionClick)="handleActionClick($event)">
   </mybudget-table>

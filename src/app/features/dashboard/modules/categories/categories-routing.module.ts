@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoryEditComponent } from './pages/category-edit/category-edit.component';
+import { EditCategoryComponent } from './pages/edit-category/edit-category.component';
 import { CategoryListComponent } from './pages/category-list/category-list.component';
-import { CategoryCreateComponent } from './pages/category-create/category-create.component';
+import { NewCategoryComponent } from './pages/new-category/new-category.component';
 
 const routes: Routes = [
   {
@@ -13,12 +13,12 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'create',
-        component: CategoryCreateComponent,
+        path: 'new',
+        component: NewCategoryComponent,
       },
       {
         path: ':id/edit',
-        component: CategoryEditComponent,
+        component: EditCategoryComponent,
       }
     ],
   }
