@@ -23,7 +23,6 @@ export class TableComponent implements OnInit {
   constructor(public router: Router, public route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    console.log({ rowData: this.columnsDefs })
   }
 
   handleClick(data: any): void {
