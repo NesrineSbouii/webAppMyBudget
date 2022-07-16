@@ -36,12 +36,10 @@ export class CategoryFormComponent implements OnInit, OnChanges {
     }
   }
 
-  
   public get name() {
     return this.form.get('name');
   }
   
-
   onSubmit() {
     this.formData.emit(this.form.value);
   }

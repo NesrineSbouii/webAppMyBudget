@@ -164,6 +164,10 @@ body {
     margin-right: auto;
 }
 
+.ml-auto {
+    margin-left: auto !important;
+}
+
 .p-0 {
     padding: 0;
 }
@@ -241,6 +245,14 @@ body {
     text-align: center;
 }
 
+.text-right {
+    text-align: right !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
 .rounded {
     border-radius: 0.25rem; /* 4px */
 }
@@ -278,7 +290,7 @@ body {
 }
 
 .w-full {
-    width: 100%;
+    width: 100% !important;
 }
 
 .min-h-screen {

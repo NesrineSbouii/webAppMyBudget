@@ -7,9 +7,9 @@ import { CategoryFormComponent } from './components/category-form/category-form.
 import { EditCategoryComponent } from './pages/edit-category/edit-category.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TitleComponent } from 'src/app/shared/components/title/title.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { NewCategoryComponent } from './pages/new-category/new-category.component';
 
 @NgModule({
