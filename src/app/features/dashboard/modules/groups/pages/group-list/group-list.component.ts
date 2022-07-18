@@ -18,8 +18,7 @@ export class GroupListComponent implements OnInit {
   columnsDefs: Column[] = [
     { header: 'ID', content: 'id' },
     { header: 'Name', content: 'name' },
-    { header: 'Projects', content: 'projects' },
-    { header: 'Members', content: 'members' },
+    { header: 'Projects', content: 'projects' }
   ];
   displayedColumns = ['name', 'projects', 'members', 'actions']
   tableOptions = { actions: [{ name: 'edit', icon: 'edit' }, { name: 'delete', icon: 'delete' }, { name: 'info', icon: 'info' }] };

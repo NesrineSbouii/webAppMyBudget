@@ -19,6 +19,6 @@ export class DeleteDialogComponent {
         this.dialogRef.close();
     }
     handleClick(): void {
-        this.onDelete.emit();
+        this.onDelete.emit(this.data);
     }
 }
