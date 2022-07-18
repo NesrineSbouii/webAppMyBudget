@@ -1,0 +1,16 @@
+$purple: #9e71c7;
+$darkblue: #2a2073;
+
+.icon {
+    width: 3rem;
+    height: 3rem;
+    background-color: $purple;
+    border-radius: 50%;
+    padding: 1rem;
+    font-size: 3rem;
+    color: #fff;
+}
+
+.darkblue {
+    color: $darkblue;
+}

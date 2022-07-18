@@ -21,7 +21,7 @@ export class AuthService {
     return signInWithEmailAndPassword(this.auth, email, password)
       .catch((error: string) => {
         this.snackBService.openSnackBar(error, 'X');
-      });;;
+      });
   }
 
   loginWithGoogle() {

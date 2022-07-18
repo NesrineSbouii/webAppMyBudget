@@ -1,0 +1,31 @@
+<div class="w-50 mx-auto mt-8">
+    <h1 class="mt-8 font-primary">{{title}}</h1>
+    <mat-card class="d-flex mt-8">
+        <form class="category-form form d-flex flex-col w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-form-field class="form-control">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" type="text" required />
+                <mat-error *ngIf="name?.hasError('required')">
+                    Name is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>Color</mat-label>
+                <input matInput formControlName="color" type="color" />
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>Icon</mat-label>
+                <input matInput formControlName="icon" type="text" />
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>Budget</mat-label>
+                <input matInput formControlName="budget" type="number" />
+            </mat-form-field>
+            <mat-card-actions align="end">
+                <button [disabled]="form.invalid" color="primary" mat-raised-button type="submit">
+                    Submit
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

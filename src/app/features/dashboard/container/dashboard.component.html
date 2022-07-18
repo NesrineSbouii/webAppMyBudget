@@ -4,12 +4,21 @@
     <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
-  Welcome to MyBudgetApp
+  <div class="ml-4">Logo</div>
+  <button mat-icon-button [matMenuTriggerFor]="menu" matBadge="15" matBadgeColor="accent" matBadgePosition="before"
+    class="ml-auto">
+    <mat-icon>notifications</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Project 2 budget exceeded</button>
+    <button mat-menu-item>Project 1 budget exceeded</button>
+  </mat-menu>
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img routerLink="profile" class="profile-img avatar mat-elevation-z8" src="https://www.screenfeed.fr/wp-content/uploads/2013/10/default-avatar.png" />
+    <img routerLink="profile" class="profile-img avatar mat-elevation-z8"
+      src="https://www.screenfeed.fr/wp-content/uploads/2013/10/default-avatar.png" />
     <h4 class="name">Administrator</h4>
 
     <mat-divider></mat-divider>
