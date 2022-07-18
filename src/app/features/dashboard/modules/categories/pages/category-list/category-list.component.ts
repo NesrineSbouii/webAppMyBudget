@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/compat/firestore';
-
 import { Observable } from 'rxjs';
 import { Column } from 'src/app/shared/models/colum';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
-
+import { CategoryService } from '../../services/category.service';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'mybudget-category-list',
@@ -17,23 +13,22 @@ import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/d
   styleUrls: ['./category-list.component.scss'],
 })
 export class CategoryListComponent implements OnInit {
-  private itemsCollection: AngularFirestoreCollection<any>;
+  collectionName = 'categories';
   items: Observable<any[]>;
+
   columnsDefs: Column[] = [
     { header: 'ID', content: 'id' },
-    { header: 'Name', content: 'name' },
-    { header: 'Color', content: 'color' },
-    { header: 'Icon', content: 'icon' },
-    { header: 'Budget', content: 'budget' },
+    { header: 'Category name', content: 'name' },
+    { header: 'Category Budget', content: 'budget' },
   ];
-  displayedColumns = ['id', 'name', 'budget', 'actions'];
+  displayedColumns = ['id', 'icon', 'color', 'name', 'budget', 'actions'];
   tableOptions = { actions: [{ name: 'edit', icon: 'edit' }, { name: 'delete', icon: 'delete' }, { name: 'info', icon: 'info' }] };
 
-  constructor(private afs: AngularFirestore, public router: Router, public route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(public router: Router, public route: ActivatedRoute, public dialog: MatDialog, private categoryService: CategoryService) {
+  }
 
   ngOnInit(): void {
-    this.itemsCollection = this.afs.collection<any>('categories');
-    this.items = this.itemsCollection.valueChanges({ idField: 'id' });
+    this.items = this.categoryService.list();
   }
 
   handleActionClick(data: any): void {
@@ -42,7 +37,7 @@ export class CategoryListComponent implements OnInit {
     switch (name) {
       case 'edit': this.router.navigate([element.id, 'edit'], { relativeTo: this.route })
         break;
-      case 'delete': this.openDeleteDialog()
+      case 'delete': this.openDeleteDialog(element)
         break;
       case 'info': console.log('Infos!!')
         break;
@@ -55,19 +50,16 @@ export class CategoryListComponent implements OnInit {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
-  openDeleteDialog(): void {
+  openDeleteDialog(data: Category): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '500px',
-      data: { title: 'Delete', description: 'Are you sure you want to delete this category?' },
+      data: { id: data.id, title: 'Delete', description: 'Are you sure you want to delete this category?' },
     });
 
     dialogRef.componentInstance.onDelete.subscribe(el => {
-      console.log('On delete Catego');
+      this.categoryService.delete(el.id);
+      dialogRef.close();
     })
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 }
 
