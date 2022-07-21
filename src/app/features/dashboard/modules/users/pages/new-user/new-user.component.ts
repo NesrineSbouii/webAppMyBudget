@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
+declare var Email: any;
 import '../../../../../../../libs/smtp.js'; 
-declare let Email: any;
 
 @Component({
   selector: 'app-new-user',
@@ -22,20 +22,24 @@ export class NewUserComponent implements OnInit {
 
   handleCreate(item: User): void {
     this.userService.add(item);
-    this.sendEmail();
+    this.sendEmail(item.email);
     this.router.navigate(['/dashboard/users']);
   }
 
 
-  sendEmail(){
+  sendEmail( email: string ){
+    console.log(email);
     Email.send({
       Host : 'smtp.elasticemail.com',
       Username : 'med.mnsour@gmail.com',
-      Password : '98390C6003FC00AA876E21820FA853F4D2C0',
-      To : 'med.mnsour@gmail.com',
-      From : `med.mnsour@gmail.com`,
-      Subject : 'password change',
+      Password : '9B76A5FDD7A2E8FDE3E179E3842D2093C5E2',
+      To : email,
+      From : 'sbouii.nesrine@gmail.com',
+      Subject : 'Welcome to My Budget App',
       Body : `
-      <i>This is sent as a default password </i>`}).then( (message: any) => {console.log(message) } );   
+        <p>MyBudget</p>
+        <i>You have been added as a member in a group </i>
+    `})
+    .then( (message: any) => {console.log(message) } );   
   }
 }
