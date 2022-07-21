@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Auth } from '@angular/fire/auth';
 @Component({
   selector: 'mybudget-project-form',
   templateUrl: './project-form.component.html',
@@ -20,9 +19,9 @@ export class ProjectFormComponent implements OnInit, OnChanges {
   private usersCollection: AngularFirestoreCollection<any>;
 
   form: FormGroup;
-  users: any;
+  groups: any;
 
-  constructor(private afs: AngularFirestore, private fb: FormBuilder, private auth: Auth) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({

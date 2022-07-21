@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Column } from 'src/app/shared/models/colum';
 
@@ -17,10 +17,11 @@ export class TableComponent implements OnInit {
   @Input() tableOptions: any;
   @Input() displayedColumns: string[];
   @Input() actions: any[];
-  
+
   @Output() onActionClick = new EventEmitter();
 
-  constructor(public router: Router, public route: ActivatedRoute) {}
+  constructor(public router: Router, public route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
   }

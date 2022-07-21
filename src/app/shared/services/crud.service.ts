@@ -13,12 +13,12 @@ import { Entity } from '../models/entity';
 })
 
 export class CrudService<T extends Entity> {
-  private collection: AngularFirestoreCollection<T>;
-  private document: AngularFirestoreDocument<T>;
+  protected collection: AngularFirestoreCollection<T>;
+  protected document: AngularFirestoreDocument<T>;
 
   constructor(
-    private afs: AngularFirestore,
-    private snackBService: SnackBarService,
+    protected afs: AngularFirestore,
+    protected snackBService: SnackBarService,
     @Inject(String) private collectionName: string,
   ) {
     this.collection = this.afs.collection<T>(this.collectionName);

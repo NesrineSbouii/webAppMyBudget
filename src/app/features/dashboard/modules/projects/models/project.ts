@@ -1,6 +1,7 @@
+import { Group } from "../../models/group";
 export interface Project {
     id?: string;
     name: string;
     budget: number;
-    memebers?: string[];
+    group?: Group;
 }
