@@ -8,9 +8,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NewProjectComponent } from './pages/new-project/new-project.component';
 import { EditProjectComponent } from './pages/edit-project/edit-project.component';
 import { ProjectFormComponent } from './components/project-form/project-form.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { ProjectService } from './services/project.service';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     ReactiveFormsModule,
     MatSelectModule,
-  ]
+  ],
+  providers: [ProjectService]
 })
 export class ProjectModule { }

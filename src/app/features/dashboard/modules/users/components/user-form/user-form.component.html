@@ -1,0 +1,43 @@
+<div class="w-50 mx-auto mt-8">
+    <h1 class="mt-8 font-primary">{{title}}</h1>
+    <mat-card class="d-flex mt-8">
+        <form class="category-form form d-flex flex-col w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-form-field class="form-control">
+                <mat-label>Firstname</mat-label>
+                <input matInput formControlName="firstname" type="text" required />
+                <mat-error *ngIf="name?.hasError('required')">
+                    Name is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>Lastname</mat-label>
+                <input matInput formControlName="lastname" type="text" />
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" type="text" />
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email" />
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>Birthdate</mat-label>
+                <input matInput formControlName="birthdate" type="text" />
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>Phone</mat-label>
+                <input matInput formControlName="phone" type="phone" />
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="address" type="text" />
+            </mat-form-field>
+            <mat-card-actions align="end">
+                <button [disabled]="form.invalid" color="primary" mat-raised-button type="submit">
+                    Submit
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

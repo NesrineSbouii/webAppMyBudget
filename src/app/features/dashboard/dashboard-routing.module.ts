@@ -43,11 +43,18 @@ const routes: Routes = [
             (m) => m.StatisticsModule
           ),
       },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./modules/users/users.module').then(
+            (m) => m.UsersModule
+          ),
+      },
     ],
   },
   {
     path: '',
-    redirectTo: '/statistics',
+    redirectTo: '/home',
     pathMatch: 'full',
   },
   { path: '**', pathMatch: 'full' },

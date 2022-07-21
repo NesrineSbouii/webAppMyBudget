@@ -8,7 +8,7 @@ import {
 import { NgModule } from '@angular/core';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['dashboard']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['dashboard/home']);
 
 const routes: Routes = [
   {

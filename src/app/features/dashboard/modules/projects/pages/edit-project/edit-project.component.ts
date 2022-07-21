@@ -1,10 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Project } from '../../models/project';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-edit-project',
@@ -13,11 +11,21 @@ import { Observable } from 'rxjs';
 })
 export class EditProjectComponent implements OnInit {
   id: string;
-  private itemDoc: AngularFirestoreDocument<any>;
   item: Observable<any>;
 
-  constructor(private afs: AngularFirestore, private route: ActivatedRoute) { }
+  constructor(private projectService: ProjectService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      if (params.has('id')) {
+        this.id = params.get('id') || '';
+        this.item = this.projectService.get(this.id);
+      }
+    });
+  }
+
+  handleUpdate(item: Project): void {
+    this.projectService.update({ ...item, id: this.id });
+    this.router.navigate(['/dashboard/projects'])
   }
 }

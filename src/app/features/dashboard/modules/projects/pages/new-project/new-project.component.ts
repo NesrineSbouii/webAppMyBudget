@@ -1,10 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Project } from '../../models/project';
+import { ProjectService } from '../../services/project.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-project',
@@ -12,12 +10,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./new-project.component.scss'],
 })
 export class NewProjectComponent implements OnInit {
-  id: string;
-  private itemDoc: AngularFirestoreDocument<any>;
   item: Observable<any>;
 
-  constructor(private afs: AngularFirestore, private route: ActivatedRoute) { }
+  constructor(private projectService: ProjectService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  handleCreate(item: Project): void {
+    this.projectService.add(item);
+    this.router.navigate(['/dashboard/projects']);
   }
 }
