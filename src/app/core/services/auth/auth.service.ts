@@ -45,7 +45,7 @@ export class AuthService {
     return signOut(this.auth);
   }
 
-  currentUser(): Observable<User[]> {
+  currentUser(): Observable<User> {
     const currentUser =  this.auth.currentUser;
     const uid = currentUser?.uid;
     return this.userService.getUserBy('uid', uid);

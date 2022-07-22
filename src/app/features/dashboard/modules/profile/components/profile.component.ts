@@ -1,11 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { map, finalize } from "rxjs/operators";
 import { from, Observable } from "rxjs";
 import { AuthService } from "src/app/core/services/auth/auth.service";
+import { User } from "../../users/models/user";
 import { UserService } from "../../users/services/user.service";
-import { User } from "@angular/fire/auth";
 
 @Component({
   selector: 'app-profile',
@@ -19,13 +18,12 @@ export class ProfileComponent implements OnInit {
   url: any;
   maxDate = new Date();
   uid: string | undefined;
-  user$: Observable<User>;
 
   constructor(private fb: FormBuilder, private readonly auth: AuthService, private userService: UserService) {
 
     this.profileForm = this.fb.group({
       id: [''],
-      image: ['assets/images/default-user.png'],
+      image: [''],
       firstName: ['', Validators.required],
       lastName: [''],
       username: ['', Validators.required],
@@ -38,8 +36,8 @@ export class ProfileComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.auth.currentUser().subscribe((user: any) => {
-      this.profileForm.patchValue(user[0]);
+    this.auth.currentUser().subscribe((user: User) => {
+      this.profileForm.patchValue(user);
     });
   }
 
@@ -48,9 +46,10 @@ export class ProfileComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    const file = event.target.files[0];
+    const file: File = event.target.files[0];
+    if (!file) return
     const storage = getStorage();
-    const storageRef = ref(storage, `users/${file}`);
+    const storageRef = ref(storage, `users/${this.profileForm.get('id').value}`);
 
     const task = uploadBytesResumable(storageRef, file);
 
@@ -79,8 +78,6 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     const form = this.profileForm.value;
-    const birthdate = form.birthdate;
-    form.birthdate = typeof birthdate === 'string'? birthdate :  form.birthdate?.toISOString().toString();
     this.userService.update(form);
   }
 }
