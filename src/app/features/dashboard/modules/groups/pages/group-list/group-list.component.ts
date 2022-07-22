@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -11,26 +10,33 @@ import { GroupService } from '../../services/group.service';
 @Component({
   selector: 'mybudget-group-list',
   templateUrl: './group-list.component.html',
-  styleUrls: ['./group-list.component.scss']
+  styleUrls: ['./group-list.component.scss'],
 })
 export class GroupListComponent implements OnInit {
-
-  private itemsCollection: AngularFirestoreCollection<any>;
-  items: Observable<any[]>;
+  items: Observable<Group[]>;
   columnsDefs: Column[] = [
     { header: 'ID', content: 'id' },
     { header: 'Name', content: 'name' },
-    { header: 'Projects', content: 'projects' }
+    { header: 'Projects', content: 'projects' },
   ];
-  displayedColumns = ['name', 'projects', 'members', 'actions']
-  tableOptions = { actions: [{ name: 'edit', icon: 'edit' }, { name: 'delete', icon: 'delete' }, { name: 'info', icon: 'info' }] };
+  displayedColumns = ['name', 'projects', 'members', 'actions'];
+  tableOptions = {
+    actions: [
+      { name: 'edit', icon: 'edit' },
+      { name: 'delete', icon: 'delete' },
+      { name: 'info', icon: 'info' },
+    ],
+  };
 
-
-  constructor(private afs: AngularFirestore, public router: Router, public route: ActivatedRoute, public dialog: MatDialog, private groupService: GroupService) { }
+  constructor(
+    private groupService: GroupService,
+    public router: Router,
+    public route: ActivatedRoute,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.itemsCollection = this.afs.collection<any>('groups');
-    this.items = this.itemsCollection.valueChanges({ idField: 'id' });
+    this.items = this.groupService.list();
   }
 
   handleCreate(): void {
@@ -41,11 +47,14 @@ export class GroupListComponent implements OnInit {
     const { name, element } = data;
 
     switch (name) {
-      case 'edit': this.router.navigate([element.id, 'edit'], { relativeTo: this.route })
+      case 'edit':
+        this.router.navigate([element.id, 'edit'], { relativeTo: this.route });
         break;
-      case 'delete': this.openDeleteDialog(element)
+      case 'delete':
+        this.openDeleteDialog(element);
         break;
-      case 'info': console.log('Infos!!')
+      case 'info':
+        console.log('Infos!!');
         break;
       default:
         break;
@@ -55,13 +64,16 @@ export class GroupListComponent implements OnInit {
   openDeleteDialog(element: Group): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '500px',
-      data: { id: element.id, title: 'Delete', description: 'Are you sure you want to delete this group?' },
+      data: {
+        id: element.id,
+        title: 'Delete',
+        description: 'Are you sure you want to delete this group?',
+      },
     });
 
-    dialogRef.componentInstance.onDelete.subscribe(el => {
+    dialogRef.componentInstance.onDelete.subscribe((el) => {
       this.groupService.delete(el.id);
       dialogRef.close();
-    })
+    });
   }
-
 }

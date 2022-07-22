@@ -9,9 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
-  declarations: [
-    DashboardComponent
-  ],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -19,6 +17,6 @@ import { MatBadgeModule } from '@angular/material/badge';
     SharedModule,
     MatMenuModule,
     MatBadgeModule,
-  ]
+  ],
 })
-export class DashboardModule { }
+export class DashboardModule {}

@@ -9,8 +9,7 @@ import { NewGroupComponent } from './pages/new-group/new-group.component';
 import { EditGroupComponent } from './pages/edit-group/edit-group.component';
 import { GroupFormComponent } from './components/group-form/group-form.component';
 import { MatCardModule } from '@angular/material/card';
-import { ReactiveFormsModule } from '@angular/forms';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { GroupService } from './services/group.service';
 
 @NgModule({
   declarations: [
@@ -26,8 +25,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     GroupsdRoutingModule,
     MatDialogModule,
     MatCardModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-  ]
+  ],
+  providers: [GroupService]
 })
-export class GroupsModule { }
+export class GroupsModule {}
