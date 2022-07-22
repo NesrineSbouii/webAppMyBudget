@@ -1,9 +1,10 @@
 <ng-container>
    <mybudget-title title="Home"></mybudget-title>
    <div class="w-100 d-flex justify-between" >
-      <app-stats-card class="w-30" icon="dataset" title="Projects" [count]="( projects$ | async )?.length"></app-stats-card>
-      <app-stats-card class="w-30" icon="group" title="Groups" [count]="(groups$ | async )?.length"></app-stats-card>
-      <app-stats-card class="w-30" icon="person" title="Categories" [count]="(categories$ | async )?.length"></app-stats-card>
+      <app-stats-card class="w-20" icon="dataset" title="Projects" [count]="( projects$ | async )?.length || 0"></app-stats-card>
+      <app-stats-card class="w-20" icon="group" title="Groups" [count]="(groups$ | async )?.length || 0"></app-stats-card>
+      <app-stats-card class="w-20" icon="person" title="Categories" [count]="(categories$ | async )?.length || 0"></app-stats-card>
+      <app-stats-card class="w-20" icon="supervised_user_circle" title="User" [count]="(users$ | async )?.length || 0"></app-stats-card>
    </div>
    <div class="d-flex justify-between mt-20">
       <mat-card class="w-45 rounded-md shadow-md">

@@ -9,22 +9,9 @@ import { Observable } from 'rxjs';
 })
 
 export class HomeService {
-  
+
   constructor(
     protected afs: AngularFirestore,
   ) {
-  }
-
-
-  getProjects(): Observable<any> {
-    return this.afs.doc('projects').valueChanges()
-  }
-
-  getGroups(): Observable<any> {
-    return this.afs.doc('groups').valueChanges()
-  }
-
-  getCategories(): Observable<any> {
-    return this.afs.doc('categories').valueChanges()
   }
 }
