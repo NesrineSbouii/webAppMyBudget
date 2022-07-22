@@ -54,8 +54,14 @@ mat-sidenav-container {
 }
 
 .name {
+    display: block;
     margin-top: 8px;
+    font-size: 1.2rem;
     font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
 }
 
 .designation {

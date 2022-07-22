@@ -1,7 +1,7 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="d-flex justify-center p-14">
     <div class="d-flex flex-col items-center w-25">
         <label for="image" class="cursor-pointer">
-            <img src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.6435-9/126330010_3399857413443791_3769230812417747347_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=aNEWNUuEt2kAX-NMafC&_nc_ht=scontent-cdg2-1.xx&oh=00_AT-KCbvGF11ZyWkxSdDWNWFu1KcpZyPkhF-VWLe9d0WoYQ&oe=62D3C41A"
+            <img [src]="profileForm?.controls?.image?.value"
                 class="avatar-md rounded-full" />
         </label>
         <p class="mt-6 text-2xl">{{profileForm.controls.firstName.value}} {{profileForm.controls.lastName.value}}</p>
@@ -48,7 +48,7 @@
             <input matInput formControlName="address" placeholder="Address">
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid">Update
+        <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid">Update
             Profile</button>
 
     </div>

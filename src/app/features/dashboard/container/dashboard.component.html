@@ -18,9 +18,8 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
     <img routerLink="profile" class="profile-img avatar mat-elevation-z8"
-      src="https://www.screenfeed.fr/wp-content/uploads/2013/10/default-avatar.png" />
-    <h4 class="name">Administrator</h4>
-
+      [src]="currentUser?.image || 'assets/images/default-user.png'" />
+    <a routerLink="profile" class="name">{{currentUser?.firstName}} {{currentUser?.lastName}}</a>
     <mat-divider></mat-divider>
 
     <button mat-button class="menu-button" routerLink="home">

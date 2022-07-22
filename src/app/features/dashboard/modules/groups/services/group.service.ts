@@ -4,18 +4,13 @@ import {
     AngularFirestore,
 } from '@angular/fire/compat/firestore';
 import { SnackBarService } from 'src/app/core/services/snackbar/snackbar.service';
-import { User } from '../models/user';
-import { Observable } from 'rxjs';
+import { Group } from '../../models/group';
 
 @Injectable({
     providedIn: 'root',
 })
-export class UserService extends CrudService<User> {
+export class GroupService extends CrudService<Group> {
     constructor(afs: AngularFirestore, snackBService: SnackBarService) {
-        super(afs, snackBService, 'users');
-    }
-
-    getUserBy(key: string, value?: string): any {
-        return this.afs.collection('users', ref => ref.where(key, '==', value)).valueChanges({ idField: 'id' });
+        super(afs, snackBService, 'groups');
     }
 }
