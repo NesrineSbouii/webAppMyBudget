@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/compat/firestore';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Group } from '../../../models/group';
 import { GroupService } from '../../services/group.service';
 
 @Component({
@@ -14,27 +11,25 @@ import { GroupService } from '../../services/group.service';
 })
 export class EditGroupComponent implements OnInit {
   id: string;
-  private itemDoc: AngularFirestoreDocument<any>;
-  item: Observable<any>;
+  item: Observable<Group>;
 
-  constructor(private afs: AngularFirestore, private route: ActivatedRoute, private router: Router,  private groupService: GroupService) {}
+  constructor(
+    private router: Router,
+    private groupService: GroupService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.has('id')) {
         this.id = params.get('id') || '';
-        this.itemDoc = this.afs.doc<any>(`groups/${this.id}`);
-        this.item = this.itemDoc.valueChanges();
+        this.item = this.groupService.get(this.id);
       }
     });
   }
 
-  handleUpdate(item: any): void {
-    this.groupService.update({
-      ...item, 
-      id: this.id,
-      project: ''
-    });
-    this.router.navigate(['/dashboard/groups'])
+  handleUpdate(item: Group): void {
+    this.groupService.update({ ...item, id: this.id });
+    this.router.navigate(['/dashboard/groups']);
   }
 }

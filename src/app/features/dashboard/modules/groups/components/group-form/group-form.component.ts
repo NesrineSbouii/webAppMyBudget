@@ -1,8 +1,19 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Group } from '../../../models/group';
 import { Project } from '../../../projects/models/project';
-
+import { ProjectService } from '../../../projects/services/project.service';
+import { User } from '../../../users/models/user';
+import { UserService } from '../../../users/services/user.service';
 
 @Component({
   selector: 'mybudget-group-form',
@@ -11,23 +22,22 @@ import { Project } from '../../../projects/models/project';
 })
 export class GroupFormComponent implements OnInit, OnChanges {
   @Input() title: string = '';
-  @Output() formData: EventEmitter<{
-    name: string;
-    color: string;
-    icon: string;
-    budget: number;
-  }> = new EventEmitter();
+  @Output() formData: EventEmitter<Group> = new EventEmitter();
 
   @Input() initData: any;
 
   form: FormGroup;
-  private projectsCollection: AngularFirestoreCollection<any>;
+  usersList: Observable<User[]>;
   projects: Project[];
   filteredProjects: Project[];
+  users: User[];
+  filteredUsers: User[];
 
-  constructor(private fb: FormBuilder, private afs: AngularFirestore,) {
-
-  }
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private projectService: ProjectService
+  ) {}
 
   get name() {
     return this.form.get('name');
@@ -37,35 +47,44 @@ export class GroupFormComponent implements OnInit, OnChanges {
     return this.form.get('project');
   }
 
+  get members() {
+    return this.form.get('members');
+  }
+
   ngOnInit(): void {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
-      project: ['', [Validators.required]]
+      project: ['', [Validators.required]],
+      members: [[], [Validators.required]],
     });
-    this.form.patchValue(this.initData)
+    this.form.patchValue(this.initData);
 
-    this.projectsCollection = this.afs.collection<Project>('projects');
-    this.projectsCollection.valueChanges({ idField: 'id' }).subscribe(projects => {
-      this.projects = projects;
-      this.filteredProjects = projects;
+    this.projectService.list()
+      .subscribe((projects) => {
+        this.projects = projects;
+        this.filteredProjects = projects;
+      });
+    this.project?.valueChanges.subscribe((value) => {
+      this.filteredProjects = this._filterProjects(value || '');
     });
 
-
-    this.project?.valueChanges.subscribe(value => {
-      this.filteredProjects = this._filter(value || '')
-    });
-
+    this.usersList = this.userService.list();
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    if (simpleChanges['initData'].currentValue != simpleChanges['initData'].previousValue) {
-      this.form?.patchValue(simpleChanges['initData'].currentValue)
+    if (
+      simpleChanges['initData'].currentValue !=
+      simpleChanges['initData'].previousValue
+    ) {
+      this.form?.patchValue(simpleChanges['initData'].currentValue);
     }
   }
 
-  private _filter(value: string): Project[] {
+  private _filterProjects(value: string): Project[] {
     const filterValue = value.toLowerCase();
-    return this.projects?.filter(option => option.name.toLowerCase().includes(filterValue));
+    return this.projects?.filter((option) =>
+      option.name.toLowerCase().includes(filterValue)
+    );
   }
 
   onSubmit() {
