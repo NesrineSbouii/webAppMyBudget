@@ -20,11 +20,10 @@ export class UserListComponent implements OnInit {
     { header: 'FirstName', content: 'firstname' },
     { header: 'LastName', content: 'lastname' },
     { header: 'Email', content: 'email' },
+    { header: 'Phone', content: 'phone' },
     { header: 'address', content: 'address' },
-    { header: 'Birthdate', content: 'birthdate' },
-    { header: 'Phone', content: 'phone' }
   ];
-  displayedColumns = ['firstname', 'lastname', 'email', 'address', 'birthdate', 'phone', 'actions'];
+  displayedColumns = ['firstname', 'lastname', 'email', 'phone', 'birthdate', 'address', 'actions'];
   tableOptions = { actions: [{ name: 'edit', icon: 'edit' }, { name: 'delete', icon: 'delete' }, { name: 'info', icon: 'info' }] };
 
   constructor(public router: Router, public route: ActivatedRoute, public dialog: MatDialog, private userService: UserService) {

@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
 import { Column } from 'src/app/shared/models/colum';
+import { Group } from '../../../models/group';
+import { GroupService } from '../../services/group.service';
 
 @Component({
   selector: 'mybudget-group-list',
@@ -24,7 +26,7 @@ export class GroupListComponent implements OnInit {
   tableOptions = { actions: [{ name: 'edit', icon: 'edit' }, { name: 'delete', icon: 'delete' }, { name: 'info', icon: 'info' }] };
 
 
-  constructor(private afs: AngularFirestore, public router: Router, public route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private afs: AngularFirestore, public router: Router, public route: ActivatedRoute, public dialog: MatDialog, private groupService: GroupService) { }
 
   ngOnInit(): void {
     this.itemsCollection = this.afs.collection<any>('groups');
@@ -41,7 +43,7 @@ export class GroupListComponent implements OnInit {
     switch (name) {
       case 'edit': this.router.navigate([element.id, 'edit'], { relativeTo: this.route })
         break;
-      case 'delete': this.openDeleteDialog()
+      case 'delete': this.openDeleteDialog(element)
         break;
       case 'info': console.log('Infos!!')
         break;
@@ -50,19 +52,16 @@ export class GroupListComponent implements OnInit {
     }
   }
 
-  openDeleteDialog(): void {
+  openDeleteDialog(element: Group): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '500px',
-      data: { title: 'Delete', description: 'Are you sure you want to delete this group?' },
+      data: { id: element.id, title: 'Delete', description: 'Are you sure you want to delete this group?' },
     });
 
-    dialogRef.componentInstance.onDelete.subscribe(() => {
-      console.log('On delete group');
+    dialogRef.componentInstance.onDelete.subscribe(el => {
+      this.groupService.delete(el.id);
+      dialogRef.close();
     })
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
   }
 
 }
