@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TableComponent } from './components/table/table.component';
 import { MaterialModule } from '../material/material.module';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   imports: [
     CommonModule,
     MaterialModule,
-    MatTooltipModule
+    MatTooltipModule,
+    RouterModule,
   ],
   exports: [TableComponent]
 })

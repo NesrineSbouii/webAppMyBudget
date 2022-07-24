@@ -60,7 +60,7 @@ export class GroupFormComponent implements OnInit, OnChanges {
     this.form.patchValue(this.initData);
 
     this.projectService.list()
-      .subscribe((projects) => {
+      .subscribe((projects: Project[]) => {
         this.projects = projects;
         this.filteredProjects = projects;
       });
