@@ -25,12 +25,12 @@ export class UserFormComponent implements OnInit, OnChanges {
       phone: ['', [Validators.required]],
       address: ['', [Validators.required]],
     });
-    this.form.patchValue(this.initData)
+    this.form.patchValue({...this.initData, birthdate : this.initData?.birthdate.toDate() })
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
     if(simpleChanges['initData'].currentValue != simpleChanges['initData'].previousValue) {
-      this.form?.patchValue(simpleChanges['initData'].currentValue)
+      this.form?.patchValue({...simpleChanges['initData'].currentValue, birthdate : simpleChanges['initData'].currentValue.birthdate.toDate() })
     }
   }
 

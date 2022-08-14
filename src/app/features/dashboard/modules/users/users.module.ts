@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewUserComponent } from './pages/new-user/new-user.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,10 @@ import { NewUserComponent } from './pages/new-user/new-user.component';
     CategoriesRoutingModule,
     SharedModule,
     MatCardModule,
-    MatDialogModule
-  ]
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers: [MatDatepickerModule]
 })
 export class UsersModule { }

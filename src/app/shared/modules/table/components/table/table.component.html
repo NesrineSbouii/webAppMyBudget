@@ -51,10 +51,9 @@
   <ng-container matColumnDef="birthdate">
     <th mat-header-cell *matHeaderCellDef>Birthdate</th>
     <td mat-cell *matCellDef="let element">
-      {{element.birthdate}}
+      {{element.birthdate.toDate() | date}}
     </td>
   </ng-container>
-
 
   <ng-container *ngIf="tableOptions?.actions">
     <ng-container matColumnDef="actions">
