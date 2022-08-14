@@ -17,8 +17,8 @@ export class UserFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       username: ['', [Validators.required]],
       email: ['', [Validators.required]],
       birthdate: [''],

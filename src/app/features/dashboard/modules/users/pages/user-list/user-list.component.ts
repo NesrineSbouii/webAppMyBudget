@@ -17,13 +17,13 @@ export class UserListComponent implements OnInit {
   items: Observable<any[]>;
 
   columnsDefs: Column[] = [
-    { header: 'FirstName', content: 'firstname' },
-    { header: 'LastName', content: 'lastname' },
+    { header: 'First Name', content: 'firstName' },
+    { header: 'Last Name', content: 'lastName' },
     { header: 'Email', content: 'email' },
     { header: 'Phone', content: 'phone' },
-    { header: 'address', content: 'address' },
+    { header: 'Address', content: 'address' },
   ];
-  displayedColumns = ['firstname', 'lastname', 'email', 'phone', 'birthdate', 'address', 'actions'];
+  displayedColumns = ['firstName', 'lastName', 'email', 'phone', 'birthdate', 'address', 'actions'];
   tableOptions = { actions: [{ name: 'edit', icon: 'edit' }, { name: 'delete', icon: 'delete' }, { name: 'info', icon: 'info' }] };
 
   constructor(public router: Router, public route: ActivatedRoute, public dialog: MatDialog, private userService: UserService) {

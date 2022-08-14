@@ -4,14 +4,14 @@
         <form class="category-form form d-flex flex-col w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-form-field class="form-control">
                 <mat-label>Firstname</mat-label>
-                <input matInput formControlName="firstname" type="text" required />
+                <input matInput formControlName="firstName" type="text" required />
                 <mat-error *ngIf="name?.hasError('required')">
                     Name is required
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="form-control">
                 <mat-label>Lastname</mat-label>
-                <input matInput formControlName="lastname" type="text" />
+                <input matInput formControlName="lastName" type="text" />
             </mat-form-field>
             <mat-form-field class="form-control">
                 <mat-label>Username</mat-label>

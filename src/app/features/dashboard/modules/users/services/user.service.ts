@@ -20,7 +20,7 @@ export class UserService extends CrudService<User> {
       .pipe(
         map((users: any[]) =>
           users.length
-            ? { ...users[0], birthdate: users[0].birthdate?.toDate() }
+            ? { ...users[0] }
             : null
         )
       );
