@@ -3,14 +3,15 @@ import { CrudService } from 'src/app/shared/services/crud.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { SnackBarService } from 'src/app/core/services/snackbar/snackbar.service';
 import { User } from '../models/user';
-import { first, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { Auth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService extends CrudService<User> {
-  constructor(afs: AngularFirestore, snackBService: SnackBarService) {
-    super(afs, snackBService, 'users');
+  constructor(afs: AngularFirestore, snackBService: SnackBarService, authService: Auth) {
+    super(afs, snackBService, authService, 'users');
   }
 
   getUserBy(key: string, value?: string): Observable<User> {

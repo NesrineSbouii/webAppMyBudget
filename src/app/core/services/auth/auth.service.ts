@@ -58,11 +58,14 @@ export class AuthService {
   }
 
   addAuthUser() {
-    this.currentUser().subscribe((user)=>{
+    this.currentUser().subscribe((user) => {
       if (!user) {
-        this.userService.add({ uid: this.auth.currentUser?.uid, email: this.auth.currentUser?.email! })
+        this.userService.add({ uid: this.auth.currentUser?.uid, email: this.auth.currentUser?.email!, birthdate: new Date() })
       }
     })
-    
+  }
+  
+  getCurrentUserId (): string{
+    return this.auth.currentUser?.uid!;
   }
 }

@@ -7,6 +7,7 @@ import { SnackBarService } from 'src/app/core/services/snackbar/snackbar.service
 import { Project } from '../models/project';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Group } from '../../models/group';
+import { Auth } from '@angular/fire/auth';
 
 @Injectable({
     providedIn: 'root',
@@ -14,8 +15,8 @@ import { Group } from '../../models/group';
 export class ProjectService extends CrudService<Project> {
     groups = new BehaviorSubject<any | null>(null);
 
-    constructor(afs: AngularFirestore, snackBService: SnackBarService) {
-        super(afs, snackBService, 'projects');
+    constructor(afs: AngularFirestore, snackBService: SnackBarService, authService: Auth) {
+        super(afs, snackBService, authService, 'projects');
         this.collection = this.afs.collection<Project>('projects');
 
     }
