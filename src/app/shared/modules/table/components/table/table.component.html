@@ -21,9 +21,8 @@
   <ng-container matColumnDef="group">
     <th mat-header-cell *matHeaderCellDef>Group</th>
     <td mat-cell *matCellDef="let element">
-      <a class="decoration-none font-primary"
-        [routerLink]="'/dashboard/groups/' + $any(element.group | async)?.id + '/edit'">{{$any(element.group |
-        async)?.name}}</a>
+      <a *ngFor="let group of element.groups" class="decoration-none font-primary"
+        [routerLink]="'/dashboard/groups/' + group + '/edit'">{{getGroupName(group) }}</a>
     </td>
   </ng-container>
 

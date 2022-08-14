@@ -12,11 +12,14 @@
             <mat-form-field class="form-control">
                 <mat-label>Budget ( en € )</mat-label>
                 <input matInput formControlName="budget" type="number" /> 
+                <mat-error *ngIf="budget?.hasError('required')">
+                    Budget is required
+                </mat-error>
             </mat-form-field>
             <mat-form-field class="form-control">
                 <mat-label>Groups</mat-label>
-                <mat-select multiple>
-                  <mat-option *ngFor="let user of groups | async" [value]="user">{{user.username}}</mat-option>
+                <mat-select multiple formControlName="groups">
+                  <mat-option *ngFor="let group of groups | async" [value]="group.id">{{group.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
             <mat-card-actions align="end">

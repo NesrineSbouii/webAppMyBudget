@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { GroupService } from 'src/app/features/dashboard/modules/groups/services/group.service';
 import { Column } from 'src/app/shared/models/colum';
-
+import { Group} from 'src/app/features/dashboard/modules/models/group'
 @Component({
   selector: 'mybudget-table',
   templateUrl: './table.component.html',
@@ -20,7 +22,7 @@ export class TableComponent implements OnInit {
 
   @Output() onActionClick = new EventEmitter();
 
-  constructor(public router: Router, public route: ActivatedRoute) {
+  constructor(public router: Router, public route: ActivatedRoute, private groupService: GroupService) {
   }
 
   ngOnInit(): void {
@@ -32,5 +34,13 @@ export class TableComponent implements OnInit {
 
   navigate(element: any) {
     this.router.navigate([element.id, 'edit'], { relativeTo: this.route });
+  }
+
+  getGroupName(id: string) {
+   this.groupService.get(id).subscribe((p ) => {
+     console.log(p.name)
+      return p.name ;
+
+    })
   }
 }
