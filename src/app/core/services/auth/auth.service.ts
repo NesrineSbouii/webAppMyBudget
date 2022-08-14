@@ -22,6 +22,9 @@ export class AuthService {
 
   login({ email, password }: LoginData) {
     return signInWithEmailAndPassword(this.auth, email, password)
+      .then(() => {
+        this.addAuthUser();
+      })
       .catch((error: string) => {
         this.snackBService.openSnackBar(error, 'X');
       });
@@ -29,6 +32,9 @@ export class AuthService {
 
   loginWithGoogle() {
     return signInWithPopup(this.auth, new GoogleAuthProvider())
+      .then(() => {
+        this.addAuthUser();
+      })
       .catch((error: string) => {
         this.snackBService.openSnackBar(error, 'X');
       });;
@@ -46,8 +52,17 @@ export class AuthService {
   }
 
   currentUser(): Observable<User> {
-    const currentUser =  this.auth.currentUser;
+    const currentUser = this.auth.currentUser;
     const uid = currentUser?.uid;
     return this.userService.getUserBy('uid', uid);
+  }
+
+  addAuthUser() {
+    this.currentUser().subscribe((user)=>{
+      if (!user) {
+        this.userService.add({ uid: this.auth.currentUser?.uid, email: this.auth.currentUser?.email! })
+      }
+    })
+    
   }
 }
