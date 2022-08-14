@@ -20,14 +20,14 @@ export class LoginPageComponent implements OnInit {
   login(loginData: LoginData) {
     this.authService
       .login(loginData)
-      .then(() => this.router.navigate(['/dashboard']))
+      .then(() => this.router.navigate(['/dashboard/home']))
       .catch((e) => console.log(e.message));
   }
 
   loginWithGoogle() {
     this.authService
       .loginWithGoogle()
-      .then(() => this.router.navigate(['/dashboard']))
+      .then(() => this.router.navigate(['/dashboard/home']))
       .catch((e) => console.log(e.message));
   }
 }

@@ -11,7 +11,7 @@ body {
 }
 
 .d-flex {
-    display: flex;
+    display: flex !important;
 }
 
 .flex-row {
@@ -87,6 +87,40 @@ body {
     margin-left: 0px;
 }
 
+.m-4 {
+    margin: 1rem; /* 8px */
+}
+
+.mx-4 {
+    margin-left: 1rem; /* 8px */
+    margin-right: 1rem; /* 8px */
+}
+
+.my-4 {
+    margin-top: 1rem; /* 8px */
+    margin-bottom: 1rem; /* 8px */
+}
+
+.mt-4 {
+    margin-top: 1rem;
+} /* 8px */
+
+.mr-4 {
+    margin-right: 1rem; /* 8px */
+}
+
+.mb-4 {
+    margin-bottom: 1rem; /* 8px */
+}
+
+.ml-4 {
+    margin-left: 1rem; /* 8px */
+}
+
+.m-8 {
+    margin: 2rem; /* 8px */
+}
+
 .ml-6 {
     margin-left: 1.5rem;
 }
@@ -95,9 +129,43 @@ body {
     margin-bottom: 1.5rem; /* 24px */
 }
 
+.mx-8 {
+    margin-left: 2rem; /* 8px */
+    margin-right: 2rem; /* 8px */
+}
+
+.my-8 {
+    margin-top: 2rem; /* 8px */
+    margin-bottom: 2rem; /* 8px */
+}
+
+.mt-8 {
+    margin-top: 2rem;
+} /* 8px */
+
+.mr-8 {
+    margin-right: 2rem; /* 8px */
+}
+
+.mb-8 {
+    margin-bottom: 2rem; /* 8px */
+}
+
+.ml-8 {
+    margin-left: 2rem; /* 8px */
+}
+
+.mt-20 {
+    margin-top: 5rem; /* 80px */
+}
+
 .mx-auto {
     margin-left: auto;
     margin-right: auto;
+}
+
+.ml-auto {
+    margin-left: auto !important;
 }
 
 .p-0 {
@@ -122,6 +190,20 @@ body {
     padding-bottom: 0;
 }
 
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.p-8 {
+    padding: 2rem !important;
+}
+
 .p-14 {
     padding: 3.5rem;
 }
@@ -142,8 +224,13 @@ body {
 }
 
 .text-2xl {
-    font-size: 1.5rem; /* 24px */
-    line-height: 2rem; /* 32px */
+    font-size: 1.5rem !important; /* 24px */
+    line-height: 2rem !important; /* 32px */
+}
+
+.text-5xl {
+    font-size: 3rem !important; /* 48px */
+    line-height: 1;
 }
 
 .font-medium {
@@ -158,12 +245,24 @@ body {
     text-align: center;
 }
 
+.text-right {
+    text-align: right !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.decoration-none {
+    text-decoration: none;
+}
+
 .rounded {
     border-radius: 0.25rem; /* 4px */
 }
 
 .rounded-md {
-    border-radius: 0.625rem;
+    border-radius: 0.625rem !important;
 }
 
 .rounded-full {
@@ -173,9 +272,20 @@ body {
 .shadow {
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
+.w-20 {
+    width: 20%;
+}
 
 .w-25 {
     width: 25%;
+}
+
+.w-30 {
+    width: 30%;
+}
+
+.w-40 {
+    width: 40%;
 }
 
 .w-50 {
@@ -187,7 +297,11 @@ body {
 }
 
 .w-full {
-    width: 100%;
+    width: 100% !important;
+}
+
+.min-h-screen {
+    min-height: 100vh;
 }
 
 .cursor-pointer {
@@ -211,4 +325,16 @@ body {
 .avatar-md {
     width: 150px;
     height: 150px;
+}
+
+.font-primary {
+    color: $brand-primary-dark;
+}
+
+.font-light-grey {
+    color: $brand-neutral-2;
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
 }

@@ -1,8 +1,10 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { map, finalize } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { from, Observable } from "rxjs";
+import { AuthService } from "src/app/core/services/auth/auth.service";
+import { User } from "../../users/models/user";
+import { UserService } from "../../users/services/user.service";
 
 @Component({
   selector: 'app-profile',
@@ -10,38 +12,50 @@ import { Observable } from "rxjs";
   styleUrls: ['./profile.component.scss']
 })
 
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
   profileForm: any;
   url: any;
   maxDate = new Date();
+  uid: string | undefined;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private readonly auth: AuthService, private userService: UserService) {
 
     this.profileForm = this.fb.group({
+      id: [''],
       image: [''],
       firstName: ['', Validators.required],
       lastName: [''],
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.pattern(/^((\+)33|0)[1-9](\d{2}){4}$/)],
-      birthdate: [new Date()],
+      birthdate: [''],
       address: ['']
+    });
+
+
+  }
+  ngOnInit(): void {
+    this.auth.currentUser().subscribe((user: User) => {
+      this.profileForm.patchValue(user);
     });
   }
 
+  get imageF() {
+    return this.profileForm.get('image');
+  }
+
   onFileSelected(event: any) {
-    const file = event.target.files[0];
+    const file: File = event.target.files[0];
+    if (!file) return
     const storage = getStorage();
-    const storageRef = ref(storage, 'images/rivers.jpg');
+    const storageRef = ref(storage, `users/${this.profileForm.get('id').value}`);
 
     const task = uploadBytesResumable(storageRef, file);
 
     task.on('state_changed',
       (snapshot) => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-        console.log({ uploadState: snapshot.state })
         switch (snapshot.state) {
           case 'paused':
             console.log('Upload is paused');
@@ -56,13 +70,14 @@ export class ProfileComponent {
       },
       () => {
         getDownloadURL(task.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL);
+          this.imageF.setValue(downloadURL);
         });
       }
     );
   }
 
   onSubmit() {
-    console.warn(this.profileForm.value);
+    const form = this.profileForm.value;
+    this.userService.update(form);
   }
 }

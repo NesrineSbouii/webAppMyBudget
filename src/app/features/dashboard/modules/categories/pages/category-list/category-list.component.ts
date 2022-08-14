@@ -1,34 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/compat/firestore';
-
 import { Observable } from 'rxjs';
 import { Column } from 'src/app/shared/models/colum';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from 'src/app/shared/components/delete-dialog/delete-dialog.component';
+import { CategoryService } from '../../services/category.service';
+import { Category } from '../../models/category';
 
 @Component({
-  selector: 'app-category-list',
+  selector: 'mybudget-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss'],
 })
 export class CategoryListComponent implements OnInit {
-  private itemsCollection: AngularFirestoreCollection<any>;
+  collectionName = 'categories';
   items: Observable<any[]>;
+
   columnsDefs: Column[] = [
-    { header: 'ID', content: 'id' },
-    { header: 'Name', content: 'name' },
-    { header: 'Color', content: 'color' },
-    { header: 'Icon', content: 'icon' },
-    { header: 'Budget', content: 'budget' },
+    { header: 'Category name', content: 'name' },
   ];
-  displayedColumns = ['name', 'budget']
+  displayedColumns = ['icon', 'name', 'color', 'budget', 'actions'];
+  tableOptions = { actions: [{ name: 'edit', icon: 'edit' }, { name: 'delete', icon: 'delete' }, { name: 'info', icon: 'info' }] };
 
-
-  constructor(private afs: AngularFirestore) {}
+  constructor(public router: Router, public route: ActivatedRoute, public dialog: MatDialog, private categoryService: CategoryService) {
+  }
 
   ngOnInit(): void {
-    this.itemsCollection = this.afs.collection<any>('categories');
-    this.items = this.itemsCollection.valueChanges();
+    this.items = this.categoryService.list();
+  }
+
+  handleActionClick(data: any): void {
+    const { name, element } = data;
+
+    switch (name) {
+      case 'edit': this.router.navigate([element.id, 'edit'], { relativeTo: this.route })
+        break;
+      case 'delete': this.openDeleteDialog(element)
+        break;
+      case 'info': console.log('Infos!!')
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleCreate(): void {
+    this.router.navigate(['new'], { relativeTo: this.route });
+  }
+
+  openDeleteDialog(data: Category): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '500px',
+      data: { id: data.id, title: 'Delete', description: 'Are you sure you want to delete this category?' },
+    });
+
+    dialogRef.componentInstance.onDelete.subscribe(el => {
+      this.categoryService.delete(el.id);
+      dialogRef.close();
+    })
   }
 }
+

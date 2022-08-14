@@ -1,0 +1,59 @@
+<div class="w-50 mx-auto mt-8">
+  <h1 class="mt-8 font-primary">{{ title }}</h1>
+  <mat-card class="d-flex mt-8">
+    <form
+      class="form d-flex flex-col w-full"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field class="form-control">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" type="text" required />
+        <mat-error *ngIf="name?.hasError('required')">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-control">
+        <mat-label>Project</mat-label>
+        <input
+          type="text"
+          placeholder="Pick one"
+          aria-label="Number"
+          matInput
+          formControlName="project"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredProjects"
+            [value]="option.name"
+          >
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <multiselect-input
+        [options]="usersList"
+        [disabled]="true"
+        formControlName="members"
+        displayAttr="email"
+        placeholder="Members"
+        ><mat-error *ngIf="members?.hasError('required')">
+            Members list is required
+          </mat-error></multiselect-input
+      >
+
+      <mat-card-actions align="end">
+        <button
+          [disabled]="form.invalid"
+          color="primary"
+          mat-raised-button
+          type="submit"
+        >
+          Submit
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

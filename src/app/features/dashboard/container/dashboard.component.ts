@@ -1,9 +1,11 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { User } from '../modules/users/models/user';
 
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { debounce, debounceTime, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,12 +14,21 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
-  constructor(private observer: BreakpointObserver, private authService: AuthService, private router: Router) { }
+  currentUser: User;
+  constructor(
+    private observer: BreakpointObserver,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.authService.currentUser().subscribe((res) => {
+      this.currentUser = res;
+    });
+  }
 
   ngAfterViewInit() {
-    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
+    this.observer.observe(['(max-width: 800px)']).pipe(debounceTime(0)).subscribe((res) => {
       if (res.matches) {
         this.sidenav.mode = 'over';
         this.sidenav.close();
@@ -26,6 +37,7 @@ export class DashboardComponent implements OnInit {
         this.sidenav.open();
       }
     });
+    
   }
 
   logout() {
