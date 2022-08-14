@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -19,9 +20,10 @@ export class CrudService<T extends Entity> {
   constructor(
     protected afs: AngularFirestore,
     protected snackBService: SnackBarService,
+    protected authService: Auth,
     @Inject(String) private collectionName: string,
   ) {
-    this.collection = this.afs.collection<T>(this.collectionName);
+    this.collection = this.afs.collection<T>(this.collectionName, collection => collection.where('refId', '==', this.authService.currentUser?.uid));
   }
 
   list(): Observable<T[]> {
@@ -34,7 +36,7 @@ export class CrudService<T extends Entity> {
   }
 
   add(item: T): void {
-    this.collection.add(item)
+    this.collection.add({ ...item, refId: this.authService.currentUser?.uid })
       .then(() => this.snackBService.dataChange.next({ operation: 'add', type: 'success' }))
       .catch((error: string) => {
         this.snackBService.dataChange.next({ operation: 'add', type: error });
