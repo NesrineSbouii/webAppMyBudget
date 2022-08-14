@@ -17,11 +17,9 @@ export class CategoryListComponent implements OnInit {
   items: Observable<any[]>;
 
   columnsDefs: Column[] = [
-    { header: 'ID', content: 'id' },
     { header: 'Category name', content: 'name' },
-    { header: 'Category Budget', content: 'budget' },
   ];
-  displayedColumns = ['id', 'icon', 'color', 'name', 'budget', 'actions'];
+  displayedColumns = ['icon', 'name', 'color', 'budget', 'actions'];
   tableOptions = { actions: [{ name: 'edit', icon: 'edit' }, { name: 'delete', icon: 'delete' }, { name: 'info', icon: 'info' }] };
 
   constructor(public router: Router, public route: ActivatedRoute, public dialog: MatDialog, private categoryService: CategoryService) {

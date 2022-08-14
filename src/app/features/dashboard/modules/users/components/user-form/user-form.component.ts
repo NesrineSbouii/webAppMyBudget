@@ -17,20 +17,20 @@ export class UserFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       username: ['', [Validators.required]],
       email: ['', [Validators.required]],
       birthdate: [''],
       phone: ['', [Validators.required]],
       address: ['', [Validators.required]],
     });
-    this.form.patchValue(this.initData)
+    this.form.patchValue({...this.initData, birthdate : this.initData?.birthdate.toDate() })
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
     if(simpleChanges['initData'].currentValue != simpleChanges['initData'].previousValue) {
-      this.form?.patchValue(simpleChanges['initData'].currentValue)
+      this.form?.patchValue({...simpleChanges['initData'].currentValue, birthdate : simpleChanges['initData'].currentValue.birthdate.toDate() })
     }
   }
 
