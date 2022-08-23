@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'mybudget-project-form',
   templateUrl: './project-form.component.html',
@@ -21,7 +22,7 @@ export class ProjectFormComponent implements OnInit, OnChanges {
   form: FormGroup;
   groups: any;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -44,8 +45,11 @@ export class ProjectFormComponent implements OnInit, OnChanges {
     return this.form.get('name');
   }
 
-
-  onSubmit() {
+  onSubmit(): void {
     this.formData.emit(this.form.value);
+  }
+
+  onCancel(): void {
+    this.router.navigateByUrl('/dashboard/projects');
   }
 }
