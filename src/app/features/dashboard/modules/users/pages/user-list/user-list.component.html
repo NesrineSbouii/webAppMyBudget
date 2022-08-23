@@ -1,5 +1,5 @@
 <ng-container>
-  <mybudget-title title="User" textButton="Create User" (onCreate)="handleCreate()"></mybudget-title>
+  <mybudget-title title="Users" textButton="Create User" (onCreate)="handleCreate()"></mybudget-title>
   <mybudget-table [rowData]="items | async" [columnsDefs]="columnsDefs" [displayedColumns]="displayedColumns"
     [tableOptions]="tableOptions" (onActionClick)="handleActionClick($event)">
   </mybudget-table>

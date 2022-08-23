@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mybudget-category-form',
@@ -18,7 +19,7 @@ export class CategoryFormComponent implements OnInit, OnChanges {
 
   @Input() initData: any;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -31,7 +32,7 @@ export class CategoryFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    if(simpleChanges['initData'].currentValue != simpleChanges['initData'].previousValue) {
+    if (simpleChanges['initData'].currentValue != simpleChanges['initData'].previousValue) {
       this.form?.patchValue(simpleChanges['initData'].currentValue)
     }
   }
@@ -39,8 +40,12 @@ export class CategoryFormComponent implements OnInit, OnChanges {
   public get name() {
     return this.form.get('name');
   }
-  
-  onSubmit() {
+
+  onSubmit(): void {
     this.formData.emit(this.form.value);
+  }
+
+  onCancel(): void {
+    this.router.navigateByUrl('/dashboard/categories');
   }
 }
