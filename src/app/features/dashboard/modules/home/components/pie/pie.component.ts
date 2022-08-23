@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CoolTheme } from './theme';
 
 @Component({
@@ -6,51 +6,55 @@ import { CoolTheme } from './theme';
   templateUrl: './pie.component.html',
   styleUrls: ['./pie.component.scss'],
 })
-export class PieComponent implements OnInit {
+export class PieComponent implements OnInit, OnChanges {
 
-  @Input() title: string = 'Your budget is 12000€';
-  @Input() data: any[] = [
-    { value: 10, name: 'rose1' },
-    { value: 5, name: 'rose2' },
-    { value: 15, name: 'rose3' },
-    { value: 25, name: 'rose4' },
-    { value: 20, name: 'rose5' },
-    { value: 35, name: 'rose6' },
-    { value: 30, name: 'rose7' },
-    { value: 40, name: 'rose8' }
-  ];
+  @Input() data: any[];
 
   options: any;
   coolTheme = CoolTheme;
 
   constructor() { }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data'].currentValue && changes['data'].currentValue !== changes['data'].previousValue) {
+      this.refreshDate();
+    }
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  refreshDate() {
     this.options = {
       title: {
-        text: this.title,
+        text: `Your budget is ${this.getSumBudget()} €`,
         // subtext: 'Budget',
         x: 'center'
       },
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)'
+        formatter: '{b} : {c} ({d}%)'
       },
       legend: {
         x: 'center',
         y: 'bottom',
-        data: ['rose1', 'rose2', 'rose3', 'rose4', 'rose5', 'rose6', 'rose7', 'rose8']
+        data: this.data.map(p => p.name)
       },
       calculable: true,
       series: [
         {
-          name: 'area',
           type: 'pie',
           radius: [30, 110],
           roseType: 'area',
-          data: this.data
+          data: this.getFormatedData()
         }
       ]
     };
+  }
+
+  getSumBudget() {
+    return this.data.reduce((acc, p) => { return acc + p.budget }, 0);
+  }
+
+  getFormatedData() {
+    return this.data.map(p => { return { value: p.budget, name: p.name } })
   }
 }
