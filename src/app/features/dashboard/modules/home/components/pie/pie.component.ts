@@ -6,7 +6,7 @@ import { CoolTheme } from './theme';
   templateUrl: './pie.component.html',
   styleUrls: ['./pie.component.scss'],
 })
-export class PieComponent implements OnInit, OnChanges {
+export class PieComponent implements OnChanges {
 
   @Input() data: any[];
 
@@ -16,13 +16,11 @@ export class PieComponent implements OnInit, OnChanges {
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'].currentValue && changes['data'].currentValue !== changes['data'].previousValue) {
-      this.refreshDate();
+      this.refreshData();
     }
   }
 
-  ngOnInit(): void { }
-
-  refreshDate() {
+  refreshData() {
     this.options = {
       title: {
         text: `Your budget is ${this.getSumBudget()} €`,

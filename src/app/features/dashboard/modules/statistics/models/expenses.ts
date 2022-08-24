@@ -3,10 +3,10 @@ import { Observable } from "rxjs";
 import { Category } from "../../categories/models/category";
 import { Project } from "../../projects/models/project";
 
-export interface Expenses {
+export interface Expense {
     id?: string;
     amount: number;
-    category: Observable<Category>;
-    project: Observable<Project>;
-    user: Observable<User>;
+    category: string;
+    project: string;
+    user: string;
 }

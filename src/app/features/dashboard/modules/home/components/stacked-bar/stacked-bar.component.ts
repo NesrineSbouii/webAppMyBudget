@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
 @Component({
@@ -6,18 +6,27 @@ import LinearGradient from 'zrender/lib/graphic/LinearGradient';
   templateUrl: './stacked-bar.component.html',
   styleUrls: ['./stacked-bar.component.scss'],
 })
-export class StackedBarComponent implements OnInit {
+export class StackedBarComponent implements OnInit, OnChanges {
 
   @Input() title: string = 'Budget exceeded projects';
-  @Input() dataAxis: string[] = ['Project1', 'Project2', 'Project3', 'Project4', 'Project5', 'Project6', 'Project7'];
-  @Input() budgets: number[] = [200, 182, 191, 234, 290, 330, 310];
-  @Input() exceededBudgets: number[] = [20, 12, 11, 24, 20, 30, 30];
+  @Input() dataAxis: string[];
+  @Input() budgets: number[];
+  @Input() exceededBudgets: number[];
 
   options: any;
 
   constructor() { }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['exceededBudgets'].currentValue && changes['exceededBudgets'].currentValue !== changes['exceededBudgets'].previousValue) {
+        this.refreshData();
+    }
+  }
 
   ngOnInit(): void {
+   
+  }
+
+  refreshData() {
     this.options = {
       title: {
         text: this.title,
@@ -26,6 +35,10 @@ export class StackedBarComponent implements OnInit {
           fontWeight: 'normal',
           color: '#2a2073'
         }
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b} : {c}'
       },
       xAxis: {
         data: this.dataAxis,
@@ -82,10 +95,6 @@ export class StackedBarComponent implements OnInit {
         },
       ],
     };
-  }
-
-  onChartEvent(event: any, type: string) {
-    console.log('chart event:', type, event);
   }
 
 }
