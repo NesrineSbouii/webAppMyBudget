@@ -4,5 +4,5 @@ export interface Project {
     id?: string;
     name: string;
     budget: number;
-    group?: Observable<Group>;
+    groups?: any;
 }

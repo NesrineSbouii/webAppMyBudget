@@ -36,11 +36,4 @@ export class TableComponent implements OnInit {
     this.router.navigate([element.id, 'edit'], { relativeTo: this.route });
   }
 
-  getGroupName(id: string) {
-   this.groupService.get(id).subscribe((p ) => {
-     console.log(p.name)
-      return p.name ;
-
-    })
-  }
 }

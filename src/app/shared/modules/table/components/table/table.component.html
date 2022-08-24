@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="rowData" class="mat-elevation-z8">
+<table mat-table [dataSource]="rowData" class="mat-elevation-z8">  
   <ng-container *ngFor="
       let column of columnsDefs;
       let index = index;
@@ -22,7 +22,7 @@
     <th mat-header-cell *matHeaderCellDef>Group</th>
     <td mat-cell *matCellDef="let element">
       <a *ngFor="let group of element.groups" class="decoration-none font-primary"
-        [routerLink]="'/dashboard/groups/' + group + '/edit'">{{getGroupName(group) }}</a>
+        [routerLink]="'/dashboard/groups/' + group + '/edit'">{{ group + ', '}}</a>
     </td>
   </ng-container>
 
