@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { GroupService } from '../../../groups/services/group.service';
 import { Group } from '../../../models/group';
+import { Router } from '@angular/router';
 @Component({
   selector: 'mybudget-project-form',
   templateUrl: './project-form.component.html',
@@ -21,7 +22,7 @@ export class ProjectFormComponent implements OnInit, OnChanges {
   form: FormGroup ;
   groups: Observable<Group[]>;;
 
-  constructor(private fb: FormBuilder, private groupService: GroupService,) {
+  constructor(private fb: FormBuilder, private groupService: GroupService, private router: Router) {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       budget: ['', [Validators.pattern(/\d+/),Validators.required]],
@@ -49,7 +50,11 @@ export class ProjectFormComponent implements OnInit, OnChanges {
     return this.form.get('budget');
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.formData.emit(this.form.value);
+  }
+
+  onCancel(): void {
+    this.router.navigateByUrl('/dashboard/projects');
   }
 }

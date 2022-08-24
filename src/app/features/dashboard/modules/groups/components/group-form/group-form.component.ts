@@ -14,6 +14,7 @@ import { Project } from '../../../projects/models/project';
 import { ProjectService } from '../../../projects/services/project.service';
 import { User } from '../../../users/models/user';
 import { UserService } from '../../../users/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mybudget-group-form',
@@ -36,7 +37,8 @@ export class GroupFormComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router: Router,
   ) {}
 
   get name() {
@@ -87,7 +89,11 @@ export class GroupFormComponent implements OnInit, OnChanges {
     );
   }
 
-  onSubmit() {
+  onSubmit():void {
     this.formData.emit(this.form.value);
+  }
+
+  onCancel(): void {
+    this.router.navigateByUrl('/dashboard/groups');
   }
 }

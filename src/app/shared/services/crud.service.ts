@@ -23,19 +23,27 @@ export class CrudService<T extends Entity> {
     protected authService: Auth,
     @Inject(String) private collectionName: string,
   ) {
+
+  }
+
+  init(): void {
+    if (this.collection) return
     this.collection = this.afs.collection<T>(this.collectionName, collection => collection.where('refId', '==', this.authService.currentUser?.uid));
   }
 
   list(): Observable<T[]> {
+    this.init();
     return this.collection.valueChanges({ idField: 'id' });
   }
 
   get(id: string): Observable<T | any> {
+    this.init();
     this.document = this.afs.doc<T>(`${this.collectionName}/${id}`);
     return this.document.valueChanges();
   }
 
   add(item: T): void {
+    this.init();
     this.collection.add({ ...item, refId: this.authService.currentUser?.uid })
       .then(() => this.snackBService.dataChange.next({ operation: 'add', type: 'success' }))
       .catch((error: string) => {
@@ -44,6 +52,7 @@ export class CrudService<T extends Entity> {
   }
 
   update(item: T): void {
+    this.init();
     this.document = this.afs.doc<T>(`${this.collectionName}/${item.id}`);
     this.document.update(item)
       .then(() => this.snackBService.dataChange.next({ operation: 'update', type: 'success' }))
@@ -53,6 +62,7 @@ export class CrudService<T extends Entity> {
   }
 
   delete(id: string): void {
+    this.init();
     this.collection.doc(id).delete()
       .then(() => this.snackBService.dataChange.next({ operation: 'delete', type: 'success' }))
       .catch((error: string) => {
