@@ -13,25 +13,6 @@
           Name is required
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="form-control">
-        <mat-label>Project</mat-label>
-        <input
-          type="text"
-          placeholder="Pick one"
-          aria-label="Number"
-          matInput
-          formControlName="project"
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option
-            *ngFor="let option of filteredProjects"
-            [value]="option.name"
-          >
-            {{ option.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
 
       <multiselect-input
         [options]="usersList"
@@ -39,7 +20,7 @@
         formControlName="members"
         displayAttr="email"
         placeholder="Members"
-        ><mat-error *ngIf="members?.hasError('required')">
+        ><mat-error *ngIf="members?.hasError('required') && form.touched">
             Members list is required
           </mat-error></multiselect-input
       >
