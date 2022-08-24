@@ -8,7 +8,7 @@
    </div>
    <div class="d-flex justify-between mt-20">
       <mat-card class="w-45 rounded-md shadow-md">
-         <app-pie></app-pie>
+         <app-pie [data]="(projects$ | async)!"></app-pie>
       </mat-card>
       <mat-card class="w-45 rounded-md shadow-md">
          <app-stacked-bar></app-stacked-bar>

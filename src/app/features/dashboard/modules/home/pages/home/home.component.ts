@@ -10,8 +10,6 @@ import { Project } from '../../../projects/models/project';
 import { ProjectService } from '../../../projects/services/project.service';
 import { User } from '../../../users/models/user';
 import { UserService } from '../../../users/services/user.service';
-import { HomeService } from '../../services/home.service';
-
 @Component({
   selector: 'mybudget-home',
   templateUrl: './home.component.html',
@@ -31,6 +29,5 @@ export class HomeComponent implements OnInit {
     this.projects$ = this.projectService.list();
     this.groups$ = this.groupService.list();
     this.users$ = this.usersService.list();
-
   }
 }
